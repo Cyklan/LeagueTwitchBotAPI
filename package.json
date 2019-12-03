@@ -1,0 +1,34 @@
+{
+  "name": "leaguetwitchbotapi",
+  "version": "0.0.1",
+  "description": "Twitch Bot Tool for League of Legends API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cyklan/LeagueTwitchBotAPI.git"
+  },
+  "keywords": [
+    "league",
+    "of",
+    "legends",
+    "twitch",
+    "bot",
+    "api",
+    "league"
+  ],
+  "author": "Nils \"Cyklan\" Fahle",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Cyklan/LeagueTwitchBotAPI/issues"
+  },
+  "homepage": "https://github.com/Cyklan/LeagueTwitchBotAPI#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0"
+  }
+}
