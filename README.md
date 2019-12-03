@@ -10,6 +10,7 @@ This API will return cleartext so that you can simply implement it into any bot 
 
 ### General
 
+All calls to the API use the GET method. Using anything else won't work.
 All API URLs have the same pattern.
 
 `URL/REGION/SUMMONERNAME/COMMAND?SETTING=SETTINGVALUE&SETTING2=SETTING2VALUE`
