@@ -53,6 +53,10 @@ Replace QUEUE with one of these queues:
 
 Will display your series games if available. Possible values are **1** and **0**. **1** will enable this option. **0** Will disable this option. If omitted, the setting will default to 0.
 
+###### showlp
+
+Will display your League Points. Possible values are **1** and **0**. **1** will enable this option. **0** Will disable this option. If omitted, the setting will default to 0.
+
 ##### Example
 
 `http://api.foo.bar/euw1/cyklan/rank/solo?series=1`
