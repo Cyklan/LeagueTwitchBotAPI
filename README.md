@@ -4,7 +4,7 @@ Easily add League of Legends related commands to streaming bots.
 
 This API will return cleartext so that you can simply implement it into any bot that can fetch from URLs.
 
-`http://api.foo.bar/euw1/cyklan/rank/soloq?withSeries=1` would return "Platinum 1 (69 LP) | Series: ✔ ❌ -".
+`http://api.foo.bar/euw1/cyklan/rank/soloq?withSeries=1` would return "Platinum 1 | Series: ✔ ❌ -".
 
 ## API Documentation
 

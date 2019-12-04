@@ -1,5 +1,6 @@
 const regionsData = require("./json/regions.json")
 const rankqueuesData = require("./json/rankqueues.json")
+const api = require("./api")
 
 const regions = region => {
 	for (let i = 0; i < regionsData.length; i++) {
@@ -9,17 +10,17 @@ const regions = region => {
 }
 
 const rankQueues = queue => {
-	for (let i = 0; i < rankqueuesData.length; i++) {
-		if (rankqueuesData[i] === queue.toLowerCase()) return true
-	}
+	if (typeof rankqueuesData[queue] === "string") return true
 	return false
 }
 
 // Will return encrypted summoner ID on success
-const summoner = name => {
-	return new Promise((resolve, reject) => {
+const summoner = (region, name) => {
+	return new Promise(async (resolve, reject) => {
 		// TODO API Stuff
-		let encryptedId = "supercoole encrypted id"
+		let encryptedId = await api.getEncryptedId(region, name).catch(error => {
+			reject(error)
+		})
 		if (true) resolve(encryptedId)
 		reject(`NO SUMMONER WITH NAME ${name} FOUND`)
 	})
