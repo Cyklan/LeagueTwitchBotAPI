@@ -72,12 +72,9 @@ router.get("/:region/:summonerName/streak", async (req, res) => {
 	// res.send("test")
 
 	do {
-		console.log(streakCount + 1)
 		lastMatchOutcome = await api.getGameResult(region, games[streakCount + 1].gameId, summonerName).catch(error => res.json(error))
 		if (includeLosses && streakCount < 0) streakType = lastMatchOutcome
 		streakCount++
-
-		console.log(streakType, lastMatchOutcome)
 	} while (streakType === lastMatchOutcome)
 
 	const isWinStreak = streakType === "win"
