@@ -22,6 +22,22 @@ const getEncryptedId = (region, name) => {
 	})
 }
 
+const getAccountId = (region, name) => {
+	region = region.toLowerCase()
+	return new Promise(async (resolve, reject) => {
+		await fetch(`https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}`, options)
+			.then(res => {
+				if (res.ok) {
+					return res.json()
+				} else {
+					throw Error()
+				}
+			}).then(res => {
+				resolve(res.accountId)
+			}).catch(error => { reject(null) })
+	})
+}
+
 const getCurrentRank = (region, encryptedSummonerId, queue) => {
 	region = region.toLowerCase()
 	return new Promise(async (resolve, reject) => {
@@ -72,7 +88,55 @@ const getPromoProgress = progress => {
 	return s
 }
 
+const getGames = (region, encryptedSummonerId) => {
+	region = region.toLowerCase()
+	const url = `https://${region}.api.riotgames.com/lol/match/v4/matchlists/by-account/${encryptedSummonerId}`
+	return new Promise(async (resolve, reject) => {
+		await fetch(url, options)
+			.then(res => {
+				if (res.ok) {
+					return res.json()
+				} else {
+					throw Error()
+				}
+			}).then(res => {
+				resolve(res.matches)
+			}).catch(error => { reject(null) })
+	})
+}
+
+const getGameResult = (region, gameId, summonerName) => {
+	region = region.toLowerCase()
+	const url = `https://${region}.api.riotgames.com/lol/match/v4/matches/${gameId}`
+	return new Promise(async (resolve, reject) => {
+		const gameInfo = await fetch(url, options)
+			.then(res => {
+				if (res.ok) {
+					return res.json()
+				} else {
+					throw Error()
+				}
+			}).catch(error => reject(error))
+
+			const player = gameInfo.participantIdentities.find(
+			p => p.player.summonerName.toLowerCase() === summonerName.toLowerCase())
+		
+		const participantId = player.participantId
+
+		const participant = gameInfo.participants.find(p => p.participantId === participantId)
+
+		const teamId = participant.teamId
+
+		const team = gameInfo.teams.find(t => t.teamId === teamId)
+
+		resolve(team.win.toLowerCase())
+	})
+}
+
 module.exports = {
 	getEncryptedId,
-	getCurrentRank
+	getCurrentRank,
+	getGames,
+	getGameResult,
+	getAccountId
 }

@@ -21,13 +21,22 @@ const summoner = (region, name) => {
 		let encryptedId = await api.getEncryptedId(region, name).catch(error => {
 			reject(error)
 		})
-		if (true) resolve(encryptedId)
-		reject(`NO SUMMONER WITH NAME ${name} FOUND`)
+		resolve(encryptedId)
+	})
+}
+
+const account = (region, name) => {
+	return new Promise(async (resolve, reject) => {
+		let accountId = await api.getAccountId(region, name).catch(error => {
+			reject(error)
+		})
+		resolve(accountId)
 	})
 }
 
 module.exports = {
 	regions,
 	rankQueues,
-	summoner
+	summoner,
+	account
 }

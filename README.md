@@ -62,3 +62,19 @@ Will display your League Points. Possible values are **1** and **0**. **1** will
 `http://api.foo.bar/euw1/cyklan/rank/solo?series=1`
 
 This will return "Platinum 1 (69 LP) | Series: ✔ ❌ -".
+
+#### streak
+
+`URL/REGION/SUMMONERNAME/streak?SETTING=SETTINGVALUE
+
+##### Settings
+
+###### losses
+
+Will include loss streaks in streak calculation. Possible values are **1** and **0**. **1** will enable this option. **0** will disable this option. If omitted, the setting will default to 0.
+
+###### Example
+
+`http://api.foo.bar/euw1/cyklan/streak?losses=1`
+
+This will return "7 losses".

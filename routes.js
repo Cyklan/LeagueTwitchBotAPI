@@ -47,4 +47,49 @@ router.get("/:region/:summonerName/rank/:queue", async (req, res) => {
 	res.send(response)
 })
 
+router.get("/:region/:summonerName/streak", async (req, res) => {
+	const { region, summonerName } = req.params
+
+	if (!validate.regions(region)) {
+		res.send("INVALID REGION")
+		return
+	}
+
+	const encryptedId = await validate.account(region, summonerName).catch(error => { return error })
+
+	if (!encryptedId) {
+		res.send(`SUMMONER ${summonerName} NOT FOUND ON ${region}`)
+		return
+	}
+
+	const includeLosses = req.query.losses == 1 || false
+	let streakType = includeLosses ? "" : "win"
+	let lastMatchOutcome = ""
+	let streakCount = -1
+
+	const games = await api.getGames(region, encryptedId).catch(error => res.json(error))
+
+	// res.send("test")
+
+	do {
+		console.log(streakCount + 1)
+		lastMatchOutcome = await api.getGameResult(region, games[streakCount + 1].gameId, summonerName).catch(error => res.json(error))
+		if (includeLosses && streakCount < 0) streakType = lastMatchOutcome
+		streakCount++
+
+		console.log(streakType, lastMatchOutcome)
+	} while (streakType === lastMatchOutcome)
+
+	const isWinStreak = streakType === "win"
+
+	let suffix = isWinStreak ? "win" : "loss"
+	if (streakCount !== 1) {
+		if (isWinStreak) suffix += "s"
+		else suffix += "es"
+	}
+
+	res.send(`${streakCount} ${suffix}`)
+
+})
+
 module.exports = router
