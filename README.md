@@ -59,6 +59,6 @@ Will display your League Points. Possible values are **1** and **0**. **1** will
 
 ##### Example
 
-`http://api.foo.bar/euw1/cyklan/rank/solo?series=1`
+`http://api.foo.bar/euw1/cyklan/rank/solo?series=1&showlp=1`
 
 This will return "Platinum 1 (69 LP) | Series: ✔ ❌ -".
