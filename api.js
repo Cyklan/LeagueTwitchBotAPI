@@ -48,7 +48,7 @@ const getCurrentRank = (region, encryptedSummonerId, queue) => {
 				} else {
 					throw Error()
 				}
-			}).catch(error => { reject(null) })
+			}).catch(error => { reject("You do not have a rank yet.") })
 		if (rankings.length === 0) { reject("You do not have a rank yet.") }
 
 		for (let i = 0; i < rankings.length; i++) {
@@ -101,7 +101,7 @@ const getGames = (region, encryptedSummonerId) => {
 				}
 			}).then(res => {
 				resolve(res.matches)
-			}).catch(error => { reject(null) })
+			}).catch(error => { reject("No recorded matches") })
 	})
 }
 
@@ -116,7 +116,7 @@ const getGameResult = (region, gameId, summonerName) => {
 				} else {
 					throw Error()
 				}
-			}).catch(error => reject(error))
+			}).catch(error => reject("No recorded matches"))
 
 			const player = gameInfo.participantIdentities.find(
 			p => p.player.summonerName.toLowerCase() === summonerName.toLowerCase())
