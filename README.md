@@ -65,7 +65,7 @@ This will return "Platinum 1 (69 LP) | Series: ✔ ❌ -".
 
 #### streak
 
-`URL/REGION/SUMMONERNAME/streak?SETTING=SETTINGVALUE
+`URL/REGION/SUMMONERNAME/streak?SETTING=SETTINGVALUE`
 
 ##### Settings
 
