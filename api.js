@@ -65,6 +65,8 @@ const getCurrentRank = (region, encryptedSummonerId, queue) => {
 				})
 			}
 		}
+
+		reject("You do not have a rank yet.")
 	})
 }
 
