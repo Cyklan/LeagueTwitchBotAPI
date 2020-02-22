@@ -107,7 +107,7 @@ const getGames = (region, encryptedSummonerId) => {
 	})
 }
 
-const getGameResult = (region, gameId, summonerName) => {
+const getGameResult = (region, gameId, accountId) => {
 	region = region.toLowerCase()
 	const url = `https://${region}.api.riotgames.com/lol/match/v4/matches/${gameId}`
 	return new Promise(async (resolve, reject) => {
@@ -120,12 +120,14 @@ const getGameResult = (region, gameId, summonerName) => {
 				}
 			}).catch(error => reject("No recorded matches"))
 
-			const player = gameInfo.participantIdentities.find(
-			p => p.player.summonerName.toLowerCase() === summonerName.toLowerCase())
-		
+		const player = gameInfo.participantIdentities.find(
+			p => p.player.accountId === accountId)
+			
+		console.log(player)
 		const participantId = player.participantId
 
 		const participant = gameInfo.participants.find(p => p.participantId === participantId)
+
 
 		const teamId = participant.teamId
 
