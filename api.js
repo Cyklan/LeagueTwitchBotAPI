@@ -123,7 +123,6 @@ const getGameResult = (region, gameId, accountId) => {
 		const player = gameInfo.participantIdentities.find(
 			p => p.player.accountId === accountId)
 			
-		console.log(player)
 		const participantId = player.participantId
 
 		const participant = gameInfo.participants.find(p => p.participantId === participantId)
